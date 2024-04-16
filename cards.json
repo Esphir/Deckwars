@@ -1,0 +1,74 @@
+[
+{
+"name": "Archer Dan",
+"attack": 2,
+"health" :5,
+"ability": ["Multi-Shot"]
+},
+{
+"name": "Cool Dog",
+"attack": 2,
+"health": 5,
+"ability": ["Suppression"]
+},
+{
+"name": "Pig",
+"attack": 1,
+"health": 2,
+"ability": ["Eat"]
+},
+{
+"name": "Scholar",
+"attack": 4,
+"health": 6,
+"ability": ["Research"]
+},
+{
+"name": "Knight",
+"attack": 5,
+"health": 8,
+"ability": ["Charge"]
+},
+{
+"name": "Farmer",
+"attack": 2,
+"health": 6,
+"ability": ["Harvest"]
+},
+{
+"name": "Eagle",
+"attack": 3,
+"health": 2,
+"ability": ["Aerial Assault"]
+},
+{
+"name": "Minion",
+"attack": 1,
+"health": 1,
+"ability": ["Swarm"]
+},
+{
+"name": "Goblin",
+"attack": 2,
+"health": 3,
+"ability": ["Mischief"]
+},
+{
+"name": "Imp",
+"attack": 2,
+"health": 4,
+"ability": ["Demonic Fury"]
+},
+{
+"name": "Sorceress",
+"attack": 3,
+"health": 4,
+"ability": ["Arcane Bolt"]
+},
+{
+"name": "Cursed Knight",
+"attack": 6,
+"health": 5,
+"ability": ["Vengeance"]
+}
+]
