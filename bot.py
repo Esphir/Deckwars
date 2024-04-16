@@ -1,5 +1,5 @@
 from commands import bot
-
+from BotToken import BotToken
 
 @bot.event
 async def on_ready():
@@ -11,4 +11,4 @@ async def on_ready():
         print(e)
 
 
-bot.run()
+bot.run(BotToken)
