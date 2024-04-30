@@ -53,8 +53,8 @@ def initialize_ratings(players):
 
 
 def update_ratings(ratings, winner, loser):
-    winner_rating = ratings.get(winner.id, 0)
-    loser_rating = ratings.get(loser.id, 0)
+    winner_rating = ratings.get(winner.id, 100)
+    loser_rating = ratings.get(loser.id, 100)
 
     # Calculate rating difference
     rating_difference = loser_rating - winner_rating
@@ -232,14 +232,14 @@ async def start_game(duel_channel, player1, player2):
     global game_phase
     global game_over
     while True:
-        await start_battle_phase(duel_channel, player1, player2)  # Pass ctx along with player1 and player2
+        await start_battle_phase(duel_channel, player1, player2)
         if game_over:
             active_players[player1] = {"limbo": []}
             active_players[player2] = {"limbo": []}
             game_phase = "planning"
             game_over = True
             break
-        if await is_game_over(duel_channel, player1, player2):  # Pass ctx along with player1 and player2
+        if await is_game_over(duel_channel, player1, player2):
             active_players[player1] = {"limbo": []}
             active_players[player2] = {"limbo": []}
             game_phase = "planning"
@@ -280,7 +280,6 @@ async def is_game_over(duel_channel, player1, player2):
 
 
 async def start_battle_phase(duel_channel, player1, player2):
-    await duel_channel.send("It's the battle phase! Both players, attack your opponent.")
     used_identifiers = []
 
     for attacker, defender in [(player1, player2), (player2, player1)]:
@@ -333,9 +332,6 @@ async def start_battle_phase(duel_channel, player1, player2):
         attacker_card_copy["health"] -= defender_damage
         defender_card_copy["health"] -= attacker_damage
 
-        await duel_channel.send(f"{defender_card['name']} took {attacker_damage} damage!")
-        await duel_channel.send(f"{attacker_card['name']} took {defender_damage} damage!")
-
         active_players[attacker]["limbo"] = [
             card if card["identifier"] != attacker_card["identifier"] else attacker_card_copy for card in
             active_players[attacker]["limbo"]]
@@ -344,8 +340,8 @@ async def start_battle_phase(duel_channel, player1, player2):
             active_players[defender]["limbo"]]
 
         used_identifiers.extend([attacker_card_identifier, defender_card_identifier])
-        await duel_channel.send(f"{attacker.mention} has chosen to attack with {attacker_card['name']}.")
-        await duel_channel.send(f"{defender.mention} has chosen to defend with {defender_card['name']}.")
+        await duel_channel.send(f"{defender_card['name']} took {attacker_damage} damage!")
+        await duel_channel.send(f"{attacker_card['name']} took {defender_damage} damage!")
 
         if await is_game_over(duel_channel, player1, player2):
             break
@@ -530,7 +526,7 @@ async def rank(ctx):
         await ctx.send("You don't have a rating yet.")
         return
 
-    player_rating = ratings[player_id]
+    player_rating = round(ratings[player_id])  # Round the player's rating
 
     # Sort ratings to get the player's rank
     sorted_ratings = sorted(ratings.items(), key=lambda x: x[1], reverse=True)

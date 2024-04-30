@@ -1,6 +1,7 @@
 from commands import bot
 from BotToken import BotToken
 
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user.name} - {bot.user.id}')
